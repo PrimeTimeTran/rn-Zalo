@@ -98,6 +98,12 @@ Here were defining our [Navigation Options](https://reactnavigation.org/docs/en/
 
 ```jsx
 MessagesStack.path = '';
+
+// ... code ..
+
+const tabNavigator = createBottomTabNavigator({
+  MessagesStack
+});
 ```
 
 **D)** Update the name of the file from `./screens/HomeScreen.js` to `./screens/MessagesScreen.js`
@@ -150,11 +156,11 @@ MessagesScreen.navigationOptions = {
 };
 ```
 
-The `title` key of the object in this code corresponds to the header we see at the top of the screen. There are other options as well which we'll soon work with..
+The value of the `title` key corresponds to the header we see at the top of the screen. There are other options as well which we'll soon work with.
 
 **F)** Repeat for `Contacts` & `Groups`.
 
-For these two, we'll rename the files, import, definitions, and appropriate variables to correspond to this content it will hold like we did with `Messages`.
+For these two, we'll rename the files, import, definitions, and appropriate variables to correspond to this content it will hold like we did with `Home` => `Messages`.
 
 <details>
 
@@ -344,6 +350,13 @@ TimelineStack.navigationOptions = {
 };
 
 TimelineStack.path = '';
+
+const tabNavigator = createBottomTabNavigator({
+  MessagesStack,
+  ContactsStack,
+  GroupsStack,
+  TimelineStack
+});
 ```
 
 ```jsx
@@ -407,6 +420,14 @@ MoreStack.navigationOptions = {
 };
 
 MoreStack.path = '';
+
+const tabNavigator = createBottomTabNavigator({
+  MessagesStack,
+  ContactsStack,
+  GroupsStack,
+  TimelineStack,
+  MoreStack
+});
 ```
 
 ```jsx
@@ -467,9 +488,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-const MessageCard = (props) => {
-  return (
-    <TouchableOpacity onPress={() => props.onGoToConversation('Conversation', { ...props })}>
+const MessageCard = (props) => (
+  <TouchableOpacity onPress={() => props.onGoToConversation('Conversation', { ...props })}>
     <View style={styles.messageCardStyle}>
       <View>
         <Image 
@@ -479,19 +499,20 @@ const MessageCard = (props) => {
       </View>
       <View style={styles.cardTextContainer}>
         <View style={styles.cardText}>
-          <Text style={{ fontWeight: 'bold' }}>{props.name}</Text>
-          <Text>{props.last_message_date}</Text>
+          <Text style={{ fontWeight: 'bold' }}>
+            {props.name}
+          </Text>
+          <Text>
+            {props.last_message_date}
+          </Text>
         </View>
-        <Text
-          numberOfLines={3}
-        >
+        <Text numberOfLines={3}>
           {props.last_message_content}
         </Text>
       </View>
     </View>
-    </TouchableOpacity>
-  );
-};
+  </TouchableOpacity>
+);
 
 export default MessageCard
 
@@ -531,7 +552,7 @@ const styles = StyleSheet.create({
 
 </details>
 
-Take note of this line. This is how we'll `navigate` to the `ConversationScreen` component. We need to pass a prop to our `MessageCard` component which will handle this behavior. Let's do that now.
+#### Take note of the following line of code.
 
 ```jsx
 <TouchableOpacity
@@ -539,7 +560,12 @@ Take note of this line. This is how we'll `navigate` to the `ConversationScreen`
 >
 ```
 
-**E)** Refactor `MessagesScreen` to use the function we just defined, `MessageCard`.
+We'll implement navigating to the `Conversation` component by passing a `prop` `onGoToConversation` to `MessageCard`.
+- The prop `onGoToConversation` is a function. 
+- The **1st** argument of this function is the `key` of the Screen we want to navigate to.
+- The **2nd** is an object. The object contains all the props sent to `MessageCard` via a [spread operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax).
+
+**E)** Refactor `MessagesScreen` to use the `component` we just defined, `MessageCard`.
 
 <details>
 
@@ -627,13 +653,15 @@ const styles = StyleSheet.create({
 
 </details>
 
-Notice this prop we pass to the `MessageCard` component.
+Look at the prop `onGoToConversation` we pass to `MessageCard` component.
 
 ```jsx
 onGoToConversation={props.navigation.navigate}
 ```
 
-There is something we have to **memorize** about React Navigation. Any component which is listed as a key's value in our `MainTabNavigator` file will automatically be passed a `prop` called `navigation`.
+#### There is something we have to **memorize** about React Navigation.
+
+Any component which is listed as a key's value in our `MainTabNavigator` file will automatically be passed a `prop` called `navigation`.
 
 This is a tremendously useful prop. Spend a few minutes reading about all the valuable data passed into it [here](https://reactnavigation.org/docs/en/navigation-prop.html).
 

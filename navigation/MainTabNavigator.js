@@ -3,7 +3,7 @@ import { Text, View, Platform } from 'react-native';
 import { 
   createStackNavigator, 
   createDrawerNavigator,
-  createBottomTabNavigator 
+  createBottomTabNavigator,
 } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
@@ -122,11 +122,11 @@ const MoreStack = createStackNavigator(
 MoreStack.navigationOptions = {
   tabBarLabel: 'More',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon 
-      focused={focused} 
+    <TabBarIcon
+      focused={focused}
       name={
-        Platform.OS === 'ios' 
-          ? 'ios-options' 
+        Platform.OS === 'ios'
+          ? 'ios-options'
           : 'md-options'
       }
     />
