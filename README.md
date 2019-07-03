@@ -791,6 +791,7 @@ MessagesScreen.navigationOptions = (props) => {
 ```
 
 We should now see that everything works as expected, *yay*.
+![pwd](./assets4/last.gif)
 
 ## Review 💻🤓🤔
 
