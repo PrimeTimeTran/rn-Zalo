@@ -1,16 +1,16 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export default function MessagesScreen(props) {
+export default function TimelineScreen(props) {
   return (
     <View style={styles.container}>
-      <Text>Messages Screen</Text>
+      <Text>Timeline Screen</Text>
     </View>
   );
 };
 
-MessagesScreen.navigationOptions = {
-  title: 'Messages'
+TimelineScreen.navigationOptions = {
+  title: 'Timeline'
 };
 
 const styles = StyleSheet.create({

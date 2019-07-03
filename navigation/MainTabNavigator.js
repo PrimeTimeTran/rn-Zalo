@@ -4,73 +4,137 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import MessagesScreen from '../screens/MessagesScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import ContactsScreen from '../screens/ContactsScreen';
+import GroupsScreen from '../screens/GroupsScreen';
+import TimelineScreen from '../screens/TimelineScreen';
+import MoreScreen from '../screens/MoreScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
   default: {},
 });
 
-const HomeStack = createStackNavigator(
+const MessagesStack = createStackNavigator(
   {
-    Home: MessagesScreen,
+    Messages: MessagesScreen,
   },
   config
 );
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+MessagesStack.navigationOptions = {
+  tabBarLabel: 'Messages',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={
         Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
+          ? 'ios-chatbubbles'
+          : 'android-messages'
       }
     />
   ),
 };
 
-HomeStack.path = '';
+MessagesStack.path = '';
 
-const LinksStack = createStackNavigator(
+const ContactsStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    Contacts: ContactsScreen,
   },
   config
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+ContactsStack.navigationOptions = {
+  tabBarLabel: 'Contacts',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
+    <TabBarIcon 
+      focused={focused} 
+      name={
+        Platform.OS === 'ios' 
+          ? 'ios-contacts' 
+          : 'md-link'
+      }
+    />
   ),
 };
 
-LinksStack.path = '';
+ContactsStack.path = '';
 
-const SettingsStack = createStackNavigator(
+const GroupsStack = createStackNavigator(
   {
-    Settings: SettingsScreen,
+    Groups: GroupsScreen,
   },
   config
 );
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+GroupsStack.navigationOptions = {
+  tabBarLabel: 'Groups',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+    <TabBarIcon 
+      focused={focused} 
+      name={
+        Platform.OS === 'ios' 
+          ? 'ios-people' 
+          : 'md-options'
+      } 
+    />
   ),
 };
 
-SettingsStack.path = '';
+GroupsStack.path = '';
+
+const TimelineStack = createStackNavigator(
+  {
+    Timeline: TimelineScreen,
+  },
+  config
+);
+
+TimelineStack.navigationOptions = {
+  tabBarLabel: 'Timeline',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon 
+      focused={focused} 
+      name={
+        Platform.OS === 'ios' 
+          ? 'ios-bookmarks'
+          : 'md-options'
+      } 
+    />
+  ),
+};
+
+TimelineStack.path = '';
+
+const MoreStack = createStackNavigator(
+  {
+    More: MoreScreen,
+  },
+  config
+);
+
+MoreStack.navigationOptions = {
+  tabBarLabel: 'More',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon 
+      focused={focused} 
+      name={
+        Platform.OS === 'ios' 
+          ? 'ios-options' 
+          : 'md-options'
+      }
+    />
+  ),
+};
+
+MoreStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
+  MessagesStack,
+  ContactsStack,
+  GroupsStack,
+  TimelineStack,
+  MoreStack
 });
 
 tabNavigator.path = '';

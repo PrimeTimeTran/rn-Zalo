@@ -1,16 +1,16 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export default function MessagesScreen(props) {
+export default function ContactsScreen(props) {
   return (
     <View style={styles.container}>
-      <Text>Messages Screen</Text>
+      <Text>Contacts Screen</Text>
     </View>
   );
 };
 
-MessagesScreen.navigationOptions = {
-  title: 'Messages'
+ContactsScreen.navigationOptions = {
+  title: 'Contacts'
 };
 
 const styles = StyleSheet.create({
