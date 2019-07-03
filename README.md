@@ -810,6 +810,7 @@ We should now see that everything works as expected, *yay*.
 - A `Drawer Navigator` has a drawer that's hidden away from view until a user wants access to it.
 - Screens defined in our Navigators are all passed a `prop` from React Navigation called `navigation`.
 - The `navigation` prop is very useful prop because the object has many useful key's that we'll need in the future.
+- **Navigation Options** is how we'll customize headers, icons, display text, & etc. for our navigators.
 
 ### Accomplishments 🥇🏆💯
 
