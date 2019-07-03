@@ -19,8 +19,17 @@ Let's build a new app 📱 using [React Native](https://facebook.github.io/react
 
 ### Learning Objectives ✍️📚📝
 
-1. Learn more about passing props.
-    - Recognize we can pass many different props to components. These props can be of many different datatypes 🍚🥦🍗🌶. Types include `String`, `Boolean`, `Object`, and, `Function`.
+1. Learn how to create multiple screens.
+    - Recognize any meaningful app has content hidden in different parts of the app; and that users need a way to **get to** that content.
+
+2. Learn how to use [React Navigation](https://reactnavigation.org/).
+    - Recognize this is a library we get with Expo which has the responsibility of handling navigation.
+
+3. Learn how to customize the default navigator of Expo.
+    - Recognize the default navigator is a boilerplate setup which we can build off of.
+
+4. Learn how to use the `navigation` prop provided by React Navigation to our screen components.
+    - Recognize it's an object with a lot of useful keys.
 
 > **Tip** 💡: 
 
@@ -795,7 +804,12 @@ We should now see that everything works as expected, *yay*.
 
 ## Review 💻🤓🤔
 
-- All components require some properties. The properties will be of many different shapes, many different data types 🍚🥦🍗🌶.
+- Screen navigation is important to providing an engaging experience for users.
+- A `Stack Navigator` has screens stacked one on top of the other. We can go "down" and "up"
+- A `Tab Navigator` has tabs at the bottom of the screen.
+- A `Drawer Navigator` has a drawer that's hidden away from view until a user wants access to it.
+- Screens defined in our Navigators are all passed a `prop` from React Navigation called `navigation`.
+- The `navigation` prop is very useful prop because the object has many useful key's that we'll need in the future.
 
 ### Accomplishments 🥇🏆💯
 
