@@ -74,7 +74,9 @@ const MessagesStack = createStackNavigator(
 );
 ```
 
-This is a [Stack Navigator](https://reactnavigation.org/docs/en/stack-navigator.html).
+This is a [Stack Navigator](https://reactnavigation.org/docs/en/stack-navigator.html). Stack navigators can be thought of as screens on top of each other. We can put a new screen onto our Stack as well as remove them.
+
+![Stack Navigator](http://mcgivery.com/wp-content/uploads/2015/12/stack.png)
 
 ```jsx
 MessagesStack.navigationOptions = {
@@ -92,7 +94,7 @@ MessagesStack.navigationOptions = {
 };
 ```
 
-Here were defining out [Navigation Options](https://reactnavigation.org/docs/en/navigation-options-resolution.html#docsNav). Specifically, what the tab says and what icon is displayed.
+Here were defining our [Navigation Options](https://reactnavigation.org/docs/en/navigation-options-resolution.html#docsNav). Specifically, what the tab says and what icon is displayed at the bottom of the screen.
 
 ```jsx
 MessagesStack.path = '';
@@ -100,15 +102,15 @@ MessagesStack.path = '';
 
 **D)** Update the name of the file from `./screens/HomeScreen.js` to `./screens/MessagesScreen.js`
 
-Everything should continue working, however our `Home` tab should be replaced with `Messsages` and should display a different icon.
+Everything should continue working, however our `Home` tab should be updated to `Messsages` and should display a different icon, *incredible*.
 
 ![pwd](./assets4/1d.gif)
 
-**E)** Delete everything in `MessagesScreen.js` and refactor to get a blank screen with a minimal amount of text, `Messages Screen`
+**E)** Delete everything in `MessagesScreen.js` and refactor to get a blank screen with minimaltext, `Messages Screen`.
 
 <details>
 
-<summary>New Messages Screen</summary>
+<summary>Refactored Messages Screen</summary>
 
 ```jsx
 import React from 'react';
@@ -138,7 +140,7 @@ const styles = StyleSheet.create({
 </details>
 
 ![pwd](./assets4/1e.png)
-There's nothing fancy going on here. Just a few required imports, a functional component defined, styles, and some additional [Navigation Options](https://reactnavigation.org/docs/en/redux-integration.html#what-about-navigationoptions).
+There's nothing fancy going on here. Just a few required imports, a functional component defined, styles, and an additional [Navigation Options](https://reactnavigation.org/docs/en/redux-integration.html#what-about-navigationoptions) for this individual screen.
 
 Take note of the following lines.
 
@@ -760,7 +762,7 @@ const drawer = createDrawerNavigator(
 export default drawer;
 ```
 
-We should now see that if we swipe from the left part of the screen to the right, a drawer opens, *amazing*.
+#### We should now see that if we swipe from the left part of the screen to the right, a drawer opens, *amazing*.
 
 ![pwd](./assets4/4c.gif)
 
@@ -799,7 +801,8 @@ MessagesScreen.navigationOptions = (props) => {
 };
 ```
 
-We should now see that everything works as expected, *yay*.
+#### We should now see that everything works as expected, *yay*.
+
 ![pwd](./assets4/last.gif)
 
 ## Review 💻🤓🤔
