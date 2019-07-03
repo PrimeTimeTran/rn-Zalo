@@ -296,7 +296,7 @@ This code will take our 3 stack navigators and consolidate them into a single [T
 
 ---
 
-### **Milestone 2 🛣🏃 Add additional screens**
+### **Milestone 2 🛣🏃 Add additional screens and `MessagesScreen` messages**
 
 **A)** Add two new tabs that correspond to Zalo's `Timeline` & `More` screens.
 
@@ -321,10 +321,10 @@ const TimelineStack = createStackNavigator(
 TimelineStack.navigationOptions = {
   tabBarLabel: 'Timeline',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon 
-      focused={focused} 
+    <TabBarIcon
+      focused={focused}
       name={
-        Platform.OS === 'ios' 
+        Platform.OS === 'ios'
           ? 'ios-bookmarks'
           : 'md-options'
       } 
@@ -360,6 +360,7 @@ const styles = StyleSheet.create({
   }
 });
 ```
+
 </details>
 
 <details>
@@ -423,17 +424,388 @@ const styles = StyleSheet.create({
 });
 ```
 
+</details>
+
+![pwd](./assets4/2a.gif)
+We should now see that we've got 5 tabs. 2 of these tabs we made ourselves, *excellent*.
+
+**B)** Get data for `MessagesScreen`.
+
+Copy [this gist](https://gist.github.com/PrimeTimeTran/b54fdc9a8f4ab7f7e8796560944bdf2b) and paste it to a file called `messages.json` in the **root** of your project.
+
+**C)** Import the data into the `MessagesScreen` for consumption.
+
+```jsx
+import messages from '../messages.json';
+```
+
+**D)** Define a new component, `MessageCard`, which will be responsible for rendering the content for each message to a beautiful card.
+
+<details>
+
+<summary>MessageCard Component</summary>
+
+```jsx
+// ./components/MessageCard.js
+import React from 'react';
+import {
+  Text,
+  View,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+
+const MessageCard = (props) => {
+  return (
+    <TouchableOpacity onPress={() => props.onGoToConversation('Conversation', { ...props })}>
+    <View style={styles.messageCardStyle}>
+      <View>
+        <Image 
+          style={styles.image}
+          source={{ uri: props.uri }}
+        />
+      </View>
+      <View style={styles.cardTextContainer}>
+        <View style={styles.cardText}>
+          <Text style={{ fontWeight: 'bold' }}>{props.name}</Text>
+          <Text>{props.last_message_date}</Text>
+        </View>
+        <Text
+          numberOfLines={3}
+        >
+          {props.last_message_content}
+        </Text>
+      </View>
+    </View>
+    </TouchableOpacity>
+  );
+};
+
+export default MessageCard
+
+const styles = StyleSheet.create({
+  messageCardStyle: {
+    margin: 5,
+    padding: 5,
+    width: '100%',
+    shadowRadius: 5,
+    shadowOpacity: 0.90,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    justifyContent: 'space-around',
+    shadowColor: 'rgba(0,0,0,0.2)',
+    shadowOffset: { height: 5, width: 5 },
+  },
+  image: {
+    width: 75,
+    height: 75,
+    borderWidth: 1,
+    borderRadius: 37,
+    borderColor: 'grey',
+  },
+  cardTextContainer: {
+    flex: 1,
+    marginLeft: 10,
+  },
+  cardText: {
+    flex: 1,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+});
+```
+
+</details>
+
+Take note of this line. This is how we'll `navigate` to the `ConversationScreen` component. We need to pass a prop to our `MessageCard` component which will handle this behavior. Let's do that now.
+
+```jsx
+<TouchableOpacity
+  onPress={() => props.onGoToConversation('Conversation', { ...props })}
+>
+```
+
+**E)** Refactor `MessagesScreen` to use the function we just defined, `MessageCard`.
+
+<details>
+
+<summary>MessagesScreen</summary>
+
+```jsx
+// ./screens/MessagesScreen.js
+import React from 'react';
+import { View, ScrollView, Text, StyleSheet } from 'react-native';
+
+import MessageCard from '../components/MessageCard';
+
+import messages from '../messages.json';
+
+export default function MessagesScreen(props) {
+  return (
+    <View style={styles.container}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+      >
+        {messages.map(msg => {
+          return (
+            <MessageCard
+              key={msg.id}
+              name={msg.first_name}
+              uri={msg.avatar_url}
+              last_message_date={msg.last_message_date}
+              last_message_content={msg.last_message_content}
+              onGoToConversation={props.navigation.navigate}
+            />
+          )
+        })}
+      </ScrollView>
+    </View>
+  );
+};
+
+MessagesScreen.navigationOptions = {
+  title: 'Messages'
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  contentContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  messageCardStyle: {
+    margin: 5,
+    padding: 5,
+    width: '100%',
+    shadowRadius: 5,
+    shadowOpacity: 0.90,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    justifyContent: 'space-around',
+    shadowColor: 'rgba(0,0,0,0.2)',
+    shadowOffset: { height: 5, width: 5 },
+  },
+  image: {
+    width: 75,
+    height: 75,
+    borderWidth: 1,
+    borderRadius: 37,
+    borderColor: 'grey',
+  },
+  cardTextContainer: {
+    flex: 1,
+    marginLeft: 10,
+  },
+  cardText: {
+    flex: 1,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+});
+
+```
+
+</details>
+
+Notice this prop we pass to the `MessageCard` component.
+
+```jsx
+onGoToConversation={props.navigation.navigate}
+```
+
+There is something we have to **memorize** about React Navigation. Any component which is listed as a key's value in our `MainTabNavigator` file will automatically be passed a `prop` called `navigation`.
+
+This is a tremendously useful prop. Spend a few minutes reading about all the valuable data passed into it [here](https://reactnavigation.org/docs/en/navigation-prop.html).
+
+This prop will allow us to navigate, pass props, and view the state of our app in terms of **where** the user is.
+
+> **Key Points** 🔑📝
+
+- Creating a new tab is as simple as defining a new component and then passing it to our [Navigators](https://medium.com/@rossbulat/introduction-to-react-navigation-and-navigators-in-react-native-3efcf7239a43).
+- React Navigation passed all screen components a prop called `navigation`.
+- The `navigation` prop provides us with a lot of useful methods such as `navigate`.
+
+---
+
+### **Milestone 3 🛣🏃 Implement behavior where a user can navigate to a specific conversation and see pertinent content**
+
+**A)** Define a new component, `ConversationScreen`, which displays a single conversation.
+
+```jsx
+// ./screens/ConversationScreen.js
+import React from 'react';
+import { Image, Text, ScrollView, StyleSheet } from 'react-native';
+
+export default function ConversationScreen(props) {
+  const propsFromMessages = props.navigation.state.params
+  return (
+    <ScrollView 
+      contentContainerStyle={styles.contentContainer}
+    >
+      <Image 
+        source={{ uri: propsFromMessages.uri }}
+        style={{
+          width: 200,
+          height: 200
+        }}
+      />
+      <Text>{props.navigation.state.params.name}</Text>
+      <Text>{props.navigation.state.params.last_message_content}</Text>
+    </ScrollView>
+  );
+};
+
+ConversationScreen.navigationOptions = {
+  title: 'Conversation'
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 15,
+    backgroundColor: '#fff'
+  },
+  contentContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+});
+
+```
+
+**B)** Import the component into `./navigators/MainTabNavigator.js`
+
+```jsx
+import ConversationScreen from '../screens/ConversationScreen';
+```
+
+**C)** Define a new key in the `MessagesStack` whose key is this component.
+
+```jsx
+const MessagesStack = createStackNavigator(
+  {
+    Messages: MessagesScreen,
+    Conversation: ConversationScreen
+  },
+  config
+);
+```
+
+The reason we place the definition in the `MessagesStack` is because the user navigates to the `ConversationScreen` component from the `MessagesScreen`; a screen in the `MessagesStack`.
+
+We should now be able to navigate to the `ConversationScreen` from our `MessagesScreen` when we press on a single card.
+
+![pwd](./assets4/3c.gif)
+
+Notice that when we tap on `Carmelina` we navigate  to a `ConversationScreen` which has data corresponding to `Carmelina`. The same thing occurs when we press on `Guntar`; *excellent*.
+
+### **Milestone 4 🛣🏃 Implement Drawer Navigation & MessagesScreen Hamburger Menu**
+
+**A)** Import a few dependencies we'll need soon into `./navigation/MainTabNavigator.js`
+
+```jsx
+import { Text, View, Platform } from 'react-native';
+import {
+  createStackNavigator,
+  createDrawerNavigator,
+  createBottomTabNavigator,
+} from 'react-navigation';
+```
+
+**B)** Scroll to the bottom of this file and delete this line.
+
+```jsx
+export default tabNavigator;
+```
+
+**C)** Define a new export for this file.
+
+Define a new component at the bottom of this file, `Drawer`, then call the `createDrawerNavigator` function we imported to define a new const `drawer`. This `drawer` will be our default export now. Notice that the `createDrawerNavigator` takes two arguments, both objects. Learn more about how to use the drawer component [here](https://reactnavigation.org/docs/en/drawer-navigator.html).
+
+```jsx
+const Drawer = () => (
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <Text>Drawer Item 1</Text>
+    <Text>Drawer Item 2</Text>
+  </View>
+);
+
+const drawer = createDrawerNavigator(
+  {
+    Initial: tabNavigator
+  },
+  {
+    contentComponent: Drawer
+  }
+);
+
+export default drawer;
+```
+
+We should now see that if we swipe from the left part of the screen to the right, a drawer opens, *amazing*.
+
+![pwd](./assets4/4c.gif)
+
+**D)** Import new dependencies so we can add the hamburger menu to `MessagesScreen`.
+
+```jsx
+import {
+  View,
+  Image,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+
+```
+
+**E)** Refactor the ``MessagesScreen.navigationOptions`` in the `MessagesScreen`. We warned ya this was gonna get more complicated =).
+
+```jsx
+MessagesScreen.navigationOptions = (props) => {
+  return {
+    title: 'Messages',
+    headerLeft: () => {
+      return (
+        <TouchableOpacity
+          onPress={props.navigation.openDrawer}
+        >
+          <Image
+            style={{ height: 20, width: 20, marginLeft: 10 }}
+            source={{ uri: 'https://cdn3.iconfinder.com/data/icons/ui-ux-essentials-solid/24/hamburger-menu-solid-512.png' }}
+          />
+        </TouchableOpacity>
+      );
+    }
+  };
+};
+```
+
+We should now see that everything works as expected, *yay*.
+
 ## Review 💻🤓🤔
 
 - All components require some properties. The properties will be of many different shapes, many different data types 🍚🥦🍗🌶.
 
 ### Accomplishments 🥇🏆💯
 
-- [X] User sees instructions advising them what to do
+- [X] User can see tabs at the bottom of the screen.
+- [X] User can press a tab to navigate to a unique screen.
+- [X] User can see tabs which corresponds to the tabs of Zalo.
+- [X] User can see a `Messsages` screen which has many messages.
+- [X] User can press on an individual message to navigate to a `Conversation` screen.
+- [X] User can see information about the user whose message they pressed on arriving at the `Conversation` screen.
+- [X] User can see an icon on the `Messages` screen which when pressed, opens a `Drawer`.
+- [X] User can see additional navigation items when they **open** the `Drawer`.
 
 ### Rockets 🚀
 
-- [ ] User can convert from USD to EURO.
-- [ ] User can convert from EURO to USD.
-- [ ] User can convert from VND to EURO.
-- [ ] User can convert from EURO to VND.

@@ -1,6 +1,10 @@
 import React from 'react';
-import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { Text, View, Platform } from 'react-native';
+import { 
+  createStackNavigator, 
+  createDrawerNavigator,
+  createBottomTabNavigator 
+} from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
 import MessagesScreen from '../screens/MessagesScreen';
@@ -8,6 +12,7 @@ import ContactsScreen from '../screens/ContactsScreen';
 import GroupsScreen from '../screens/GroupsScreen';
 import TimelineScreen from '../screens/TimelineScreen';
 import MoreScreen from '../screens/MoreScreen';
+import ConversationScreen from '../screens/ConversationScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -17,6 +22,7 @@ const config = Platform.select({
 const MessagesStack = createStackNavigator(
   {
     Messages: MessagesScreen,
+    Conversation: ConversationScreen
   },
   config
 );
@@ -139,4 +145,20 @@ const tabNavigator = createBottomTabNavigator({
 
 tabNavigator.path = '';
 
-export default tabNavigator;
+const Drawer = () => (
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <Text>Drawer Item 1</Text>
+    <Text>Drawer Item 2</Text>
+  </View>
+);
+
+const drawer = createDrawerNavigator(
+  {
+    Initial: tabNavigator
+  },
+  {
+    contentComponent: Drawer
+  }
+);
+
+export default drawer;
