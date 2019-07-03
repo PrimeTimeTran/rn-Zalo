@@ -1,4 +1,4 @@
-# WK3 - Lab - **Zalo Navigation**
+# WK4 - Lab - **Zalo Navigation**
 
 ## Introduction 🌟
 
@@ -560,10 +560,12 @@ const styles = StyleSheet.create({
 >
 ```
 
-We'll implement navigating to the `Conversation` component by passing a `prop` `onGoToConversation` to `MessageCard`.
-- The prop `onGoToConversation` is a function. 
+We'll implement navigating to the `Conversation` component by passing a `prop`, `onGoToConversation`, to `MessageCard` shortly.
+
+- The prop `onGoToConversation` is a function.
 - The **1st** argument of this function is the `key` of the Screen we want to navigate to.
 - The **2nd** is an object. The object contains all the props sent to `MessageCard` via a [spread operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax).
+- The `object` we pass as the second argument will end up as props in the destination component, the value of the `Conversation` **key/argument**.
 
 **E)** Refactor `MessagesScreen` to use the `component` we just defined, `MessageCard`.
 
@@ -677,7 +679,7 @@ This prop will allow us to navigate, pass props, and view the state of our app i
 
 ### **Milestone 3 🛣🏃 Implement behavior where a user can navigate to a specific conversation and see pertinent content**
 
-**A)** Define a new component, `ConversationScreen`, which displays a single conversation.
+**A)** Define a new component, `ConversationScreen`, which will represent a private conversation our user has with another user.
 
 ```jsx
 // ./screens/ConversationScreen.js
@@ -727,7 +729,7 @@ const styles = StyleSheet.create({
 import ConversationScreen from '../screens/ConversationScreen';
 ```
 
-**C)** Define a new key in the `MessagesStack` whose key is this component.
+**C)** Define a new key, `Conversation`, in the `MessagesStack` where the value is the component we just imported, `ConversationScreen`.
 
 ```jsx
 const MessagesStack = createStackNavigator(
@@ -804,7 +806,6 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-
 ```
 
 **E)** Refactor the ``MessagesScreen.navigationOptions`` in the `MessagesScreen`. We warned ya this was gonna get more complicated =).
