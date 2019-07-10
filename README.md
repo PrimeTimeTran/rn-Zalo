@@ -4,7 +4,7 @@
 
 Let's build a new app 📱 using [React Native](https://facebook.github.io/react-native/) & [Expo](https://expo.io/). We're going to clone Zalo. Our app will help users see a lot of unique content based on what it is they're looking for. This will require the use of a library called [React Navigation](https://reactnavigation.org/) that comes with Expo.
 
-![pwd](https://i.imgur.com/HtHBzqx.jpg)
+![pwd](./assets4/intro.gif)
 
 ### Features 🎯🥇🏆
 
