@@ -1,10 +1,10 @@
-# WK4 - Lab - **Zalo Navigation**
+# Week 4 - Lab - **Zalo Navigation**
 
 ## Introduction 🌟
 
 Let's build a new app 📱 using [React Native](https://facebook.github.io/react-native/) & [Expo](https://expo.io/). We're going to clone Zalo. Our app will help users see a lot of unique content based on what it is they're looking for. This will require the use of a library called [React Navigation](https://reactnavigation.org/) that comes with Expo.
 
-![pwd](./assets4/intro.gif)
+![pwd](https://i.imgur.com/HtHBzqx.jpg)
 
 ### Features 🎯🥇🏆
 
@@ -20,28 +20,31 @@ Let's build a new app 📱 using [React Native](https://facebook.github.io/react
 ### Learning Objectives ✍️📚📝
 
 1. Learn how to create multiple screens.
-    - Recognize any meaningful app has content hidden in different parts of the app; and that users need a way to **get to** that content.
+
+   - Recognize any meaningful app has content hidden in different parts of the app; and that users need a way to **get to** that content.
 
 2. Learn how to use [React Navigation](https://reactnavigation.org/).
-    - Recognize this is a library we get with Expo which has the responsibility of handling navigation.
+
+   - Recognize this is a library we get with Expo which has the responsibility of handling navigation.
 
 3. Learn how to customize the default navigator of Expo.
-    - Recognize the default navigator is a boilerplate setup which we can build off of.
+
+   - Recognize the default navigator is a boilerplate setup which we can build off of.
 
 4. Learn how to use the `navigation` prop provided by React Navigation to our screen components.
-    - Recognize it's an object with a lot of useful keys.
+   - Recognize it's an object with a lot of useful keys.
 
-> **Tip** 💡: 
+> **Tip** 💡:
 
 ### **Milestone 1 🛣🏃 Setup initial screens**
 
 **A)** Use `expo init` to generate a new project. I'm calling mine `rn-zalo`. This time however, choose the **tabs** option when prompted.
 
-![pwd](./assets4/1a.png)
+![pwd](https://i.imgur.com/KdO1Kd3.png)
 
 #### We should now see a new boiler plate app when we open our simulator that has 3 default tabs at the bottom, `Home`, `Links`, & `Settings`
 
-![pwd](./assets4/1b.png)
+![pwd](https://i.imgur.com/5wXJJMO.png)
 
 > **Tip** 💡: This project has a lot of stuff setup for you. Poke around the inital code for a minute or two to see how the team at Facebook likes structuring their projects. You'll learn a lot!
 
@@ -68,7 +71,7 @@ We're changing the component we're importing and where we're importing from in o
 ```jsx
 const MessagesStack = createStackNavigator(
   {
-    Messages: MessagesScreen,
+    Messages: MessagesScreen
   },
   config
 );
@@ -84,13 +87,9 @@ MessagesStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? 'ios-chatbubbles'
-          : 'android-messages'
-      }
+      name={Platform.OS === 'ios' ? 'ios-chatbubbles' : 'android-messages'}
     />
-  ),
+  )
 };
 ```
 
@@ -108,9 +107,9 @@ const tabNavigator = createBottomTabNavigator({
 
 **D)** Update the name of the file from `./screens/HomeScreen.js` to `./screens/MessagesScreen.js`
 
-Everything should continue working, however our `Home` tab should be updated to `Messsages` and should display a different icon, *incredible*.
+Everything should continue working, however our `Home` tab should be updated to `Messsages` and should display a different icon, _incredible_.
 
-![pwd](./assets4/1d.gif)
+![pwd](https://i.imgur.com/F8DdIOH.gif)
 
 **E)** Delete everything in `MessagesScreen.js` and refactor to get a blank screen with minimaltext, `Messages Screen`.
 
@@ -128,7 +127,7 @@ export default function MessagesScreen(props) {
       <Text>Messages Screen</Text>
     </View>
   );
-};
+}
 
 MessagesScreen.navigationOptions = {
   title: 'Messages'
@@ -138,14 +137,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   }
 });
 ```
 
 </details>
 
-![pwd](./assets4/1e.png)
+![pwd](https://i.imgur.com/WNassZC.png)
 There's nothing fancy going on here. Just a few required imports, a functional component defined, styles, and an additional [Navigation Options](https://reactnavigation.org/docs/en/redux-integration.html#what-about-navigationoptions) for this individual screen.
 
 Take note of the following lines.
@@ -175,7 +174,7 @@ import ContactsScreen from '../screens/ContactsScreen';
 // ./navigation/MainTabNavigator.js
 const ContactsStack = createStackNavigator(
   {
-    Contacts: ContactsScreen,
+    Contacts: ContactsScreen
   },
   config
 );
@@ -185,13 +184,9 @@ ContactsStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? 'ios-contacts'
-          : 'md-link'
-      }
+      name={Platform.OS === 'ios' ? 'ios-contacts' : 'md-link'}
     />
-  ),
+  )
 };
 
 ContactsStack.path = '';
@@ -208,7 +203,7 @@ export default function ContactsScreen(props) {
       <Text>Contacts Screen</Text>
     </View>
   );
-};
+}
 
 ContactsScreen.navigationOptions = {
   title: 'Contacts'
@@ -218,7 +213,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   }
 });
 ```
@@ -238,7 +233,7 @@ import GroupsScreen from '../screens/GroupsScreen';
 // ./navigation/MainTabNavigator.js
 const GroupsStack = createStackNavigator(
   {
-    Groups: GroupsScreen,
+    Groups: GroupsScreen
   },
   config
 );
@@ -248,13 +243,9 @@ GroupsStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? 'ios-people'
-          : 'md-options'
-      }
+      name={Platform.OS === 'ios' ? 'ios-people' : 'md-options'}
     />
-  ),
+  )
 };
 
 GroupsStack.path = '';
@@ -271,7 +262,7 @@ export default function GroupsScreen(props) {
       <Text>Groups Screen</Text>
     </View>
   );
-};
+}
 
 GroupsScreen.navigationOptions = {
   title: 'Groups'
@@ -281,7 +272,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   }
 });
 ```
@@ -294,11 +285,11 @@ const styles = StyleSheet.create({
 const tabNavigator = createBottomTabNavigator({
   MessagesStack,
   ContactsStack,
-  GroupsStack,
+  GroupsStack
 });
 ```
 
-![pwd](./assets4/1g.gif)
+![pwd](https://i.imgur.com/fKDx0lJ.gif)
 
 This code will take our 3 stack navigators and consolidate them into a single [Tab Navigator](https://reactnavigation.org/docs/en/tab-based-navigation.html).
 
@@ -330,7 +321,7 @@ import TimelineScreen from '../screens/TimelineScreen';
 // ./navigation/MainTabNavigator.js
 const TimelineStack = createStackNavigator(
   {
-    Timeline: TimelineScreen,
+    Timeline: TimelineScreen
   },
   config
 );
@@ -340,13 +331,9 @@ TimelineStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? 'ios-bookmarks'
-          : 'md-options'
-      } 
+      name={Platform.OS === 'ios' ? 'ios-bookmarks' : 'md-options'}
     />
-  ),
+  )
 };
 
 TimelineStack.path = '';
@@ -370,7 +357,7 @@ export default function TimelineScreen(props) {
       <Text>Timeline Screen</Text>
     </View>
   );
-};
+}
 
 TimelineScreen.navigationOptions = {
   title: 'Timeline'
@@ -380,7 +367,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   }
 });
 ```
@@ -400,7 +387,7 @@ import MoreScreen from '../screens/MoreScreen';
 // ./navigation/MainTabNavigator.js
 const MoreStack = createStackNavigator(
   {
-    More: MoreScreen,
+    More: MoreScreen
   },
   config
 );
@@ -410,13 +397,9 @@ MoreStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? 'ios-options'
-          : 'md-options'
-      }
+      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
     />
-  ),
+  )
 };
 
 MoreStack.path = '';
@@ -441,7 +424,7 @@ export default function MoreScreen(props) {
       <Text>More Screen</Text>
     </View>
   );
-};
+}
 
 MoreScreen.navigationOptions = {
   title: 'More'
@@ -451,15 +434,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   }
 });
 ```
 
 </details>
 
-![pwd](./assets4/2a.gif)
-We should now see that we've got 5 tabs. 2 of these tabs we made ourselves, *excellent*.
+![pwd](https://i.imgur.com/UfEukDf.gif)
+We should now see that we've got 5 tabs. 2 of these tabs we made ourselves, _excellent_.
 
 **B)** Get data for `MessagesScreen`.
 
@@ -480,41 +463,28 @@ import messages from '../messages.json';
 ```jsx
 // ./components/MessageCard.js
 import React from 'react';
-import {
-  Text,
-  View,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+import { Text, View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
-const MessageCard = (props) => (
-  <TouchableOpacity onPress={() => props.onGoToConversation('Conversation', { ...props })}>
+const MessageCard = props => (
+  <TouchableOpacity
+    onPress={() => props.onGoToConversation('Conversation', { ...props })}
+  >
     <View style={styles.messageCardStyle}>
       <View>
-        <Image 
-          style={styles.image}
-          source={{ uri: props.uri }}
-        />
+        <Image style={styles.image} source={{ uri: props.uri }} />
       </View>
       <View style={styles.cardTextContainer}>
         <View style={styles.cardText}>
-          <Text style={{ fontWeight: 'bold' }}>
-            {props.name}
-          </Text>
-          <Text>
-            {props.last_message_date}
-          </Text>
+          <Text style={{ fontWeight: 'bold' }}>{props.name}</Text>
+          <Text>{props.last_message_date}</Text>
         </View>
-        <Text numberOfLines={3}>
-          {props.last_message_content}
-        </Text>
+        <Text numberOfLines={3}>{props.last_message_content}</Text>
       </View>
     </View>
   </TouchableOpacity>
 );
 
-export default MessageCard
+export default MessageCard;
 
 const styles = StyleSheet.create({
   messageCardStyle: {
@@ -522,31 +492,31 @@ const styles = StyleSheet.create({
     padding: 5,
     width: '100%',
     shadowRadius: 5,
-    shadowOpacity: 0.90,
+    shadowOpacity: 0.9,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
     justifyContent: 'space-around',
     shadowColor: 'rgba(0,0,0,0.2)',
-    shadowOffset: { height: 5, width: 5 },
+    shadowOffset: { height: 5, width: 5 }
   },
   image: {
     width: 75,
     height: 75,
     borderWidth: 1,
     borderRadius: 37,
-    borderColor: 'grey',
+    borderColor: 'grey'
   },
   cardTextContainer: {
     flex: 1,
-    marginLeft: 10,
+    marginLeft: 10
   },
   cardText: {
     flex: 1,
     width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
+    justifyContent: 'space-between'
+  }
 });
 ```
 
@@ -599,12 +569,12 @@ export default function MessagesScreen(props) {
               last_message_content={msg.last_message_content}
               onGoToConversation={props.navigation.navigate}
             />
-          )
+          );
         })}
       </ScrollView>
     </View>
   );
-};
+}
 
 MessagesScreen.navigationOptions = {
   title: 'Messages'
@@ -613,44 +583,43 @@ MessagesScreen.navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
   },
   contentContainer: {
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   messageCardStyle: {
     margin: 5,
     padding: 5,
     width: '100%',
     shadowRadius: 5,
-    shadowOpacity: 0.90,
+    shadowOpacity: 0.9,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
     justifyContent: 'space-around',
     shadowColor: 'rgba(0,0,0,0.2)',
-    shadowOffset: { height: 5, width: 5 },
+    shadowOffset: { height: 5, width: 5 }
   },
   image: {
     width: 75,
     height: 75,
     borderWidth: 1,
     borderRadius: 37,
-    borderColor: 'grey',
+    borderColor: 'grey'
   },
   cardTextContainer: {
     flex: 1,
-    marginLeft: 10,
+    marginLeft: 10
   },
   cardText: {
     flex: 1,
     width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
+    justifyContent: 'space-between'
+  }
 });
-
 ```
 
 </details>
@@ -687,12 +656,10 @@ import React from 'react';
 import { Image, Text, ScrollView, StyleSheet } from 'react-native';
 
 export default function ConversationScreen(props) {
-  const propsFromMessages = props.navigation.state.params
+  const propsFromMessages = props.navigation.state.params;
   return (
-    <ScrollView 
-      contentContainerStyle={styles.contentContainer}
-    >
-      <Image 
+    <ScrollView contentContainerStyle={styles.contentContainer}>
+      <Image
         source={{ uri: propsFromMessages.uri }}
         style={{
           width: 200,
@@ -703,7 +670,7 @@ export default function ConversationScreen(props) {
       <Text>{props.navigation.state.params.last_message_content}</Text>
     </ScrollView>
   );
-};
+}
 
 ConversationScreen.navigationOptions = {
   title: 'Conversation'
@@ -717,10 +684,9 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   }
 });
-
 ```
 
 **B)** Import the component into `./navigators/MainTabNavigator.js`
@@ -745,9 +711,9 @@ The reason we place the definition in the `MessagesStack` is because the user na
 
 We should now be able to navigate to the `ConversationScreen` from our `MessagesScreen` when we press on a single card.
 
-![pwd](./assets4/3c.gif)
+![pwd](https://i.imgur.com/4q7wAAq.gif)
 
-Notice that when we tap on `Carmelina` we navigate  to a `ConversationScreen` which has data corresponding to `Carmelina`. The same thing occurs when we press on `Guntar`; *excellent*.
+Notice that when we tap on `Carmelina` we navigate to a `ConversationScreen` which has data corresponding to `Carmelina`. The same thing occurs when we press on `Guntar`; _excellent_.
 
 ### **Milestone 4 🛣🏃 Implement Drawer Navigation & MessagesScreen Hamburger Menu**
 
@@ -758,7 +724,7 @@ import { Text, View, Platform } from 'react-native';
 import {
   createStackNavigator,
   createDrawerNavigator,
-  createBottomTabNavigator,
+  createBottomTabNavigator
 } from 'react-navigation';
 ```
 
@@ -792,9 +758,9 @@ const drawer = createDrawerNavigator(
 export default drawer;
 ```
 
-#### We should now see that if we swipe from the left part of the screen to the right, a drawer opens, *amazing*.
+#### We should now see that if we swipe from the left part of the screen to the right, a drawer opens, _amazing_.
 
-![pwd](./assets4/4c.gif)
+![pwd](https://i.imgur.com/zYEJ8bv.gif)
 
 **D)** Import new dependencies so we can add the hamburger menu to `MessagesScreen`.
 
@@ -804,24 +770,25 @@ import {
   Image,
   ScrollView,
   StyleSheet,
-  TouchableOpacity,
+  TouchableOpacity
 } from 'react-native';
 ```
 
-**E)** Refactor the ``MessagesScreen.navigationOptions`` in the `MessagesScreen`. We warned ya this was gonna get more complicated =).
+**E)** Refactor the `MessagesScreen.navigationOptions` in the `MessagesScreen`. We warned ya this was gonna get more complicated =).
 
 ```jsx
-MessagesScreen.navigationOptions = (props) => {
+MessagesScreen.navigationOptions = props => {
   return {
     title: 'Messages',
     headerLeft: () => {
       return (
-        <TouchableOpacity
-          onPress={props.navigation.openDrawer}
-        >
+        <TouchableOpacity onPress={props.navigation.openDrawer}>
           <Image
             style={{ height: 20, width: 20, marginLeft: 10 }}
-            source={{ uri: 'https://cdn3.iconfinder.com/data/icons/ui-ux-essentials-solid/24/hamburger-menu-solid-512.png' }}
+            source={{
+              uri:
+                'https://cdn3.iconfinder.com/data/icons/ui-ux-essentials-solid/24/hamburger-menu-solid-512.png'
+            }}
           />
         </TouchableOpacity>
       );
@@ -830,9 +797,9 @@ MessagesScreen.navigationOptions = (props) => {
 };
 ```
 
-#### We should now see that everything works as expected, *yay*.
+#### We should now see that everything works as expected, _yay_
 
-![pwd](./assets4/last.gif)
+![pwd](https://i.imgur.com/lmsYHKs.gif)
 
 ## Review 💻🤓🤔
 
@@ -846,14 +813,16 @@ MessagesScreen.navigationOptions = (props) => {
 
 ### Accomplishments 🥇🏆💯
 
-- [X] User can see tabs at the bottom of the screen.
-- [X] User can press a tab to navigate to a unique screen.
-- [X] User can see tabs which corresponds to the tabs of Zalo.
-- [X] User can see a `Messsages` screen which has many messages.
-- [X] User can press on an individual message to navigate to a `Conversation` screen.
-- [X] User can see information about the user whose message they pressed on arriving at the `Conversation` screen.
-- [X] User can see an icon on the `Messages` screen which when pressed, opens a `Drawer`.
-- [X] User can see additional navigation items when they **open** the `Drawer`.
+- [x] User can see tabs at the bottom of the screen.
+- [x] User can press a tab to navigate to a unique screen.
+- [x] User can see tabs which corresponds to the tabs of Zalo.
+- [x] User can see a `Messsages` screen which has many messages.
+- [x] User can press on an individual message to navigate to a `Conversation` screen.
+- [x] User can see information about the user whose message they pressed on arriving at the `Conversation` screen.
+- [x] User can see an icon on the `Messages` screen which when pressed, opens a `Drawer`.
+- [x] User can see additional navigation items when they **open** the `Drawer`.
 
 ### Rockets 🚀
 
+- [ ] User can press on a a users profile image inside of the `Messages` screen to be directed to a profile screen.
+- [ ] User can press a link within their drawer to go to a `Settings` screen.
