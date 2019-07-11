@@ -4,7 +4,7 @@
 
 Let's build a new app 📱 using [React Native](https://facebook.github.io/react-native/) & [Expo](https://expo.io/). We're going to clone Zalo. Our app will help users see a lot of unique content based on what it is they're looking for. This will require the use of a library called [React Navigation](https://reactnavigation.org/) that comes with Expo.
 
-![pwd](./assets4/intro.gif)
+![pwd](https://i.imgur.com/HtHBzqx.jpg)
 
 ### Features 🎯🥇🏆
 
@@ -20,21 +20,17 @@ Let's build a new app 📱 using [React Native](https://facebook.github.io/react
 ### Learning Objectives ✍️📚📝
 
 1. Learn how to create multiple screens.
-
-   - Recognize any meaningful app has content hidden in different parts of the app; and that users need a way to **get to** that content.
+    - Recognize any meaningful app has content hidden in different parts of the app; and that users need a way to **get to** that content.
 
 2. Learn how to use [React Navigation](https://reactnavigation.org/).
-
-   - Recognize this is a library we get with Expo which has the responsibility of handling navigation.
-
+    - Recognize this is a library we get with Expo which has the responsibility of handling navigation.
 3. Learn how to customize the default navigator of Expo.
-
-   - Recognize the default navigator is a boilerplate setup which we can build off of.
+    - Recognize the default n`avigator is a boilerplate setup which we can build off of.
 
 4. Learn how to use the `navigation` prop provided by React Navigation to our screen components.
    - Recognize it's an object with a lot of useful keys.
 
-> **Tip** 💡:
+> **Tip** 💡: Screens give us a way to provide a lot of content to our users for their consumption whether it's for work or play. Structuring the screens in a meaningful and easily understood way is called [information architecture](https://en.wikipedia.org/wiki/Information_architecture).
 
 ### **Milestone 1 🛣🏃 Setup initial screens**
 
@@ -55,13 +51,13 @@ We're going to need 5 screens `Messsages`, `Contacts`, `Groups`, `Timeline`, & `
 Open up the `./navigation/MainTabNavigator.js` file and look for the following line.
 
 ```jsx
-import HomeScreen from '../screens/HomeScreen';
+import HomeScreen from "../screens/HomeScreen";
 ```
 
 Then change it to
 
 ```jsx
-import MessagesScreen from '../screens/MessagesScreen';
+import MessagesScreen from "../screens/MessagesScreen";
 ```
 
 We're changing the component we're importing and where we're importing from in order to be more explicit to our future teammates.
@@ -83,11 +79,11 @@ This is a [Stack Navigator](https://reactnavigation.org/docs/en/stack-navigator.
 
 ```jsx
 MessagesStack.navigationOptions = {
-  tabBarLabel: 'Messages',
+  tabBarLabel: "Messages",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-chatbubbles' : 'android-messages'}
+      name={Platform.OS === "ios" ? "ios-chatbubbles" : "android-messages"}
     />
   )
 };
@@ -96,7 +92,7 @@ MessagesStack.navigationOptions = {
 Here were defining our [Navigation Options](https://reactnavigation.org/docs/en/navigation-options-resolution.html#docsNav). Specifically, what the tab says and what icon is displayed at the bottom of the screen.
 
 ```jsx
-MessagesStack.path = '';
+MessagesStack.path = "";
 
 // ... code ..
 
@@ -118,8 +114,8 @@ Everything should continue working, however our `Home` tab should be updated to 
 <summary>Refactored Messages Screen</summary>
 
 ```jsx
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
 
 export default function MessagesScreen(props) {
   return (
@@ -130,14 +126,14 @@ export default function MessagesScreen(props) {
 }
 
 MessagesScreen.navigationOptions = {
-  title: 'Messages'
+  title: "Messages"
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
 ```
@@ -151,7 +147,7 @@ Take note of the following lines.
 
 ```jsx
 MessagesScreen.navigationOptions = {
-  title: 'Messages'
+  title: "Messages"
 };
 ```
 
@@ -167,7 +163,7 @@ For these two, we'll rename the files, import, definitions, and appropriate vari
 
 ```jsx
 // ./navigation/MainTabNavigator.js
-import ContactsScreen from '../screens/ContactsScreen';
+import ContactsScreen from "../screens/ContactsScreen";
 ```
 
 ```jsx
@@ -180,22 +176,22 @@ const ContactsStack = createStackNavigator(
 );
 
 ContactsStack.navigationOptions = {
-  tabBarLabel: 'Contacts',
+  tabBarLabel: "Contacts",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-contacts' : 'md-link'}
+      name={Platform.OS === "ios" ? "ios-contacts" : "md-link"}
     />
   )
 };
 
-ContactsStack.path = '';
+ContactsStack.path = "";
 ```
 
 ```jsx
 // ./screens/ContactsScreen.js
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
 
 export default function ContactsScreen(props) {
   return (
@@ -206,14 +202,14 @@ export default function ContactsScreen(props) {
 }
 
 ContactsScreen.navigationOptions = {
-  title: 'Contacts'
+  title: "Contacts"
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
 ```
@@ -226,7 +222,7 @@ const styles = StyleSheet.create({
 
 ```jsx
 // ./navigation/MainTabNavigator.js
-import GroupsScreen from '../screens/GroupsScreen';
+import GroupsScreen from "../screens/GroupsScreen";
 ```
 
 ```jsx
@@ -239,22 +235,22 @@ const GroupsStack = createStackNavigator(
 );
 
 GroupsStack.navigationOptions = {
-  tabBarLabel: 'Groups',
+  tabBarLabel: "Groups",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-people' : 'md-options'}
+      name={Platform.OS === "ios" ? "ios-people" : "md-options"}
     />
   )
 };
 
-GroupsStack.path = '';
+GroupsStack.path = "";
 ```
 
 ```jsx
 // ./screens/GroupsScreen.js
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
 
 export default function GroupsScreen(props) {
   return (
@@ -265,14 +261,14 @@ export default function GroupsScreen(props) {
 }
 
 GroupsScreen.navigationOptions = {
-  title: 'Groups'
+  title: "Groups"
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
 ```
@@ -314,7 +310,7 @@ This code will take our 3 stack navigators and consolidate them into a single [T
 
 ```jsx
 // ./navigation/MainTabNavigator.js
-import TimelineScreen from '../screens/TimelineScreen';
+import TimelineScreen from "../screens/TimelineScreen";
 ```
 
 ```jsx
@@ -327,16 +323,16 @@ const TimelineStack = createStackNavigator(
 );
 
 TimelineStack.navigationOptions = {
-  tabBarLabel: 'Timeline',
+  tabBarLabel: "Timeline",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-bookmarks' : 'md-options'}
+      name={Platform.OS === "ios" ? "ios-bookmarks" : "md-options"}
     />
   )
 };
 
-TimelineStack.path = '';
+TimelineStack.path = "";
 
 const tabNavigator = createBottomTabNavigator({
   MessagesStack,
@@ -348,8 +344,8 @@ const tabNavigator = createBottomTabNavigator({
 
 ```jsx
 // ./screens/TimelineScreen.js
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
 
 export default function TimelineScreen(props) {
   return (
@@ -360,14 +356,14 @@ export default function TimelineScreen(props) {
 }
 
 TimelineScreen.navigationOptions = {
-  title: 'Timeline'
+  title: "Timeline"
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
 ```
@@ -380,7 +376,7 @@ const styles = StyleSheet.create({
 
 ```jsx
 // ./navigation/MainTabNavigator.js
-import MoreScreen from '../screens/MoreScreen';
+import MoreScreen from "../screens/MoreScreen";
 ```
 
 ```jsx
@@ -393,16 +389,16 @@ const MoreStack = createStackNavigator(
 );
 
 MoreStack.navigationOptions = {
-  tabBarLabel: 'More',
+  tabBarLabel: "More",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+      name={Platform.OS === "ios" ? "ios-options" : "md-options"}
     />
   )
 };
 
-MoreStack.path = '';
+MoreStack.path = "";
 
 const tabNavigator = createBottomTabNavigator({
   MessagesStack,
@@ -415,8 +411,8 @@ const tabNavigator = createBottomTabNavigator({
 
 ```jsx
 // ./screens/MoreScreen.js
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
 
 export default function MoreScreen(props) {
   return (
@@ -427,14 +423,14 @@ export default function MoreScreen(props) {
 }
 
 MoreScreen.navigationOptions = {
-  title: 'More'
+  title: "More"
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
 ```
@@ -451,7 +447,7 @@ Copy [this gist](https://gist.github.com/PrimeTimeTran/b54fdc9a8f4ab7f7e87965609
 **C)** Import the data into the `MessagesScreen` for consumption.
 
 ```jsx
-import messages from '../messages.json';
+import messages from "../messages.json";
 ```
 
 **D)** Define a new component, `MessageCard`, which will be responsible for rendering the content for each message to a beautiful card.
@@ -462,12 +458,12 @@ import messages from '../messages.json';
 
 ```jsx
 // ./components/MessageCard.js
-import React from 'react';
-import { Text, View, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import React from "react";
+import { Text, View, Image, StyleSheet, TouchableOpacity } from "react-native";
 
 const MessageCard = props => (
   <TouchableOpacity
-    onPress={() => props.onGoToConversation('Conversation', { ...props })}
+    onPress={() => props.onGoToConversation("Conversation", { ...props })}
   >
     <View style={styles.messageCardStyle}>
       <View>
@@ -475,7 +471,7 @@ const MessageCard = props => (
       </View>
       <View style={styles.cardTextContainer}>
         <View style={styles.cardText}>
-          <Text style={{ fontWeight: 'bold' }}>{props.name}</Text>
+          <Text style={{ fontWeight: "bold" }}>{props.name}</Text>
           <Text>{props.last_message_date}</Text>
         </View>
         <Text numberOfLines={3}>{props.last_message_content}</Text>
@@ -490,14 +486,14 @@ const styles = StyleSheet.create({
   messageCardStyle: {
     margin: 5,
     padding: 5,
-    width: '100%',
+    width: "100%",
     shadowRadius: 5,
     shadowOpacity: 0.9,
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    justifyContent: 'space-around',
-    shadowColor: 'rgba(0,0,0,0.2)',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "white",
+    justifyContent: "space-around",
+    shadowColor: "rgba(0,0,0,0.2)",
     shadowOffset: { height: 5, width: 5 }
   },
   image: {
@@ -505,7 +501,7 @@ const styles = StyleSheet.create({
     height: 75,
     borderWidth: 1,
     borderRadius: 37,
-    borderColor: 'grey'
+    borderColor: "grey"
   },
   cardTextContainer: {
     flex: 1,
@@ -513,9 +509,9 @@ const styles = StyleSheet.create({
   },
   cardText: {
     flex: 1,
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between'
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between"
   }
 });
 ```
@@ -545,12 +541,12 @@ We'll implement navigating to the `Conversation` component by passing a `prop`, 
 
 ```jsx
 // ./screens/MessagesScreen.js
-import React from 'react';
-import { View, ScrollView, Text, StyleSheet } from 'react-native';
+import React from "react";
+import { View, ScrollView, Text, StyleSheet } from "react-native";
 
-import MessageCard from '../components/MessageCard';
+import MessageCard from "../components/MessageCard";
 
-import messages from '../messages.json';
+import messages from "../messages.json";
 
 export default function MessagesScreen(props) {
   return (
@@ -577,29 +573,29 @@ export default function MessagesScreen(props) {
 }
 
 MessagesScreen.navigationOptions = {
-  title: 'Messages'
+  title: "Messages"
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: "#fff"
   },
   contentContainer: {
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: "center",
+    justifyContent: "center"
   },
   messageCardStyle: {
     margin: 5,
     padding: 5,
-    width: '100%',
+    width: "100%",
     shadowRadius: 5,
     shadowOpacity: 0.9,
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    justifyContent: 'space-around',
-    shadowColor: 'rgba(0,0,0,0.2)',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "white",
+    justifyContent: "space-around",
+    shadowColor: "rgba(0,0,0,0.2)",
     shadowOffset: { height: 5, width: 5 }
   },
   image: {
@@ -607,7 +603,7 @@ const styles = StyleSheet.create({
     height: 75,
     borderWidth: 1,
     borderRadius: 37,
-    borderColor: 'grey'
+    borderColor: "grey"
   },
   cardTextContainer: {
     flex: 1,
@@ -615,9 +611,9 @@ const styles = StyleSheet.create({
   },
   cardText: {
     flex: 1,
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between'
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between"
   }
 });
 ```
@@ -652,8 +648,8 @@ This prop will allow us to navigate, pass props, and view the state of our app i
 
 ```jsx
 // ./screens/ConversationScreen.js
-import React from 'react';
-import { Image, Text, ScrollView, StyleSheet } from 'react-native';
+import React from "react";
+import { Image, Text, ScrollView, StyleSheet } from "react-native";
 
 export default function ConversationScreen(props) {
   const propsFromMessages = props.navigation.state.params;
@@ -673,18 +669,18 @@ export default function ConversationScreen(props) {
 }
 
 ConversationScreen.navigationOptions = {
-  title: 'Conversation'
+  title: "Conversation"
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: '#fff'
+    backgroundColor: "#fff"
   },
   contentContainer: {
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
 ```
@@ -692,7 +688,7 @@ const styles = StyleSheet.create({
 **B)** Import the component into `./navigators/MainTabNavigator.js`
 
 ```jsx
-import ConversationScreen from '../screens/ConversationScreen';
+import ConversationScreen from "../screens/ConversationScreen";
 ```
 
 **C)** Define a new key, `Conversation`, in the `MessagesStack` where the value is the component we just imported, `ConversationScreen`.
@@ -720,12 +716,12 @@ Notice that when we tap on `Carmelina` we navigate to a `ConversationScreen` whi
 **A)** Import a few dependencies we'll need soon into `./navigation/MainTabNavigator.js`
 
 ```jsx
-import { Text, View, Platform } from 'react-native';
+import { Text, View, Platform } from "react-native";
 import {
   createStackNavigator,
   createDrawerNavigator,
   createBottomTabNavigator
-} from 'react-navigation';
+} from "react-navigation";
 ```
 
 **B)** Scroll to the bottom of this file and delete this line.
@@ -740,7 +736,7 @@ Define a new component at the bottom of this file, `Drawer`, then call the `crea
 
 ```jsx
 const Drawer = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
     <Text>Drawer Item 1</Text>
     <Text>Drawer Item 2</Text>
   </View>
@@ -771,7 +767,7 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity
-} from 'react-native';
+} from "react-native";
 ```
 
 **E)** Refactor the `MessagesScreen.navigationOptions` in the `MessagesScreen`. We warned ya this was gonna get more complicated =).
@@ -779,7 +775,7 @@ import {
 ```jsx
 MessagesScreen.navigationOptions = props => {
   return {
-    title: 'Messages',
+    title: "Messages",
     headerLeft: () => {
       return (
         <TouchableOpacity onPress={props.navigation.openDrawer}>
@@ -787,7 +783,7 @@ MessagesScreen.navigationOptions = props => {
             style={{ height: 20, width: 20, marginLeft: 10 }}
             source={{
               uri:
-                'https://cdn3.iconfinder.com/data/icons/ui-ux-essentials-solid/24/hamburger-menu-solid-512.png'
+                "https://cdn3.iconfinder.com/data/icons/ui-ux-essentials-solid/24/hamburger-menu-solid-512.png"
             }}
           />
         </TouchableOpacity>
